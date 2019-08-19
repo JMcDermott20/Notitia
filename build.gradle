@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+    id'application'
+    id'com.github.johnrengelman.shadow' version '4.0.4'
+}
+
+group 'com.tacetnox.bots'
+version '1.0.0_000'
+
+mainClassName = 'com.tacetnox.bots.Notitia'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    jcenter()
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.15'
+    compile 'net.dv8tion:JDA:4.0.0_43'
+    compile 'com.jagrosh:jda-utilities:3.0.1'
+    compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+    compile 'com.github.Samuel-Maddock:StrawPoll-Java-API:1.0.4'
+}
+
+compileJava.options.encoding = 'UTF-8'
