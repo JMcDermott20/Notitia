@@ -2,3 +2,10 @@
 /workspace.xml
 .idea/
 build/
+/gradle.xml
+/misc.xml
+/uiDesigner.xml
+/vcs.xml
+/.gradle/
+.gradle/
+gradle/
