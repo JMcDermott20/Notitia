@@ -14,6 +14,7 @@ import com.jagrosh.jdautilities.examples.command.AboutCommand;
 import com.jagrosh.jdautilities.examples.command.PingCommand;
 import com.jagrosh.jdautilities.examples.command.ShutdownCommand;
 import net.dv8tion.jda.api.*;
+import net.dv8tion.jda.api.entities.Activity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -63,24 +64,21 @@ class ThreadMe implements Runnable{
         public void run(){
                 try{
 
-                        Thread.sleep(TimeUnit.MILLISECONDS.toSeconds(2));
                         log.info("~~ Acquiring properties ~~");
                         Connection conn = new SQLConnect().connect();
-                        Thread.sleep(TimeUnit.MILLISECONDS.toSeconds(2));
 
                         log.info("~~ Assigning token ~~");
                         String token = new GetLogin0Auth().getAuth(conn);
-                        Thread.sleep(TimeUnit.MILLISECONDS.toSeconds(2));
 
                         log.info("~~ Assigning owner ~~");
                         String owner = new GetLoginOwner().getOwner(conn);
-                        Thread.sleep(TimeUnit.MILLISECONDS.toSeconds(2));
+
             /*
                 Testing JDA utils
             */
 
                         log.info("~~ Setting up JDA client ~~");
-                        Thread.sleep(TimeUnit.MILLISECONDS.toSeconds(2));
+
                         EventWaiter waiter = new EventWaiter();
                         CommandClientBuilder client = new CommandClientBuilder();
 
@@ -90,7 +88,10 @@ class ThreadMe implements Runnable{
                         client.setEmojis("\uD83D\uDE03", "\uD83D\uDE2E", "\uD83D\uDE26");
                         //Assigning prefix
                         client.setPrefix("!!");
-                        Thread.sleep(TimeUnit.MILLISECONDS.toSeconds(2));
+
+                        //testing activity setting...
+                        client.setActivity(Activity.watching("clouds float by..."));
+
                         log.info("~~ Adding commands ~~");
                         client.addCommands(
                                 new AboutCommand(Color.BLUE, "an experiment in being useful in providing information and being a testing ground for new ideas!",

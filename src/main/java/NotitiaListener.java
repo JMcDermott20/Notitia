@@ -48,7 +48,7 @@ public class NotitiaListener extends ListenerAdapter {
     public void onReady(ReadyEvent event){
         log.info("Now logged in as " + event.getJDA().getAccountType().toString() + " -- " + event.getJDA().getSelfUser().getName());
         jda = event.getJDA();
-        jda.getPresence().setActivity(Activity.playing(jda.getGuilds().size() + " Guilds being Supervised~"));
+        jda.getPresence().setActivity(Activity.watching("Clouds float by..."));
     }
 
     //listener for messages received. Passes them off to handler after setting the announcement channel
@@ -169,8 +169,6 @@ public class NotitiaListener extends ListenerAdapter {
                     }
             );
         }
-
-
         //TODO Example of adding unicode reaction to message
         //event.getMessage().addReaction("\uD83D\uDCA5").queue();
 
