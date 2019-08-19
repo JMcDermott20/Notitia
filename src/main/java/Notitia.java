@@ -112,11 +112,8 @@ class ThreadMe implements Runnable{
                         log.info("~~ Building bot async");
                         jda = new JDABuilder(AccountType.BOT)
                                 .setToken(token)
-
-                                //Status while loading
-                                .setStatus(OnlineStatus.DO_NOT_DISTURB)
-
-
+                                .setBulkDeleteSplittingEnabled(false)
+                                .setStatus(OnlineStatus.DO_NOT_DISTURB)//Status while loading
                                 .addEventListeners(new NotitiaListener(), waiter, client.build())
                                 .build();
 
