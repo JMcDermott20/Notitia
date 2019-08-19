@@ -7,7 +7,7 @@ plugins {
 group 'com.tacetnox.bots'
 version '1.0.0_000'
 
-mainClassName = 'com.tacetnox.bots.Notitia'
+mainClassName = 'Notitia'
 
 sourceCompatibility = 1.8
 
