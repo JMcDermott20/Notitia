@@ -77,7 +77,10 @@ public class NotitiaListener extends ListenerAdapter {
         //Handling PM's
         if (event.isFromType(ChannelType.PRIVATE)) {
 
-            //Commands already do responses in private as part of their own listener
+            //Commands respond to the channel they are received from, so commands created and added that way
+            //are handled automatically. Will only need to use this in the event of someone sending something other
+            //than a command for the bot in a PM. Possibly just a quick response and a flag to reply saying to message
+            //me directly if they need assistance with something. Can also log PM's if anyone is trying to screw with the bot
 
             /*
             PrivateChannel privateChannel = event.getPrivateChannel();
@@ -126,7 +129,7 @@ public class NotitiaListener extends ListenerAdapter {
         System.out.println(time+" : " + guild+" : "+channel.getName()+" : "+user.getName()+" - "+message);
 
         /*
-        THE FOLLOWING IS A BETTER WAY OF MANAGING API CALLS, shows how to set CLIENT-ID and OAUTH Headers
+        THE FOLLOWING IS A BETTER WAY OF MANAGING API CALLS to Twitch, shows how to set CLIENT-ID and OAUTH Headers
          */
         if(message.equalsIgnoreCase("!test")){
             HttpURLConnection conn = null;
