@@ -39,15 +39,9 @@ public class MinecraftInfoCommand extends Command
         EmbedBuilder embed = new EmbedBuilder();
         test = (embed
                 .addField("Thanks for your interest in the server!", "Please read the following information for connecting.", true)
-                .addField("*Connection Info:*", "" +
-                        "The IP address is: bandy.theyak.center:25565" +
-                        "\nThe current modpack is Direwolf20 Version 1.10, located on the Feed the Beast launcher." +
-                        "\nNOTE: We have altered it slightly, you will need to download the new version of the Numina mod: "
-                        + "http://minecraft.curseforge.com/projects/numina/files/2256264/download" +
-                        "\nOnce you download the new version from the above link, go to your FTB folder. Under direwolf20_17 / minecraft / mods, "
-                        + "locate the OLD version of Numina and remove it(may want to save for later" +
-                        "\nPlace the newly downloaded version in its place and you should be able to connect just fine!" +
-                        "\n", false).setColor(Color.GREEN)
+                .addField("*Connection Info:*", "\n" +
+                        "The server is currently down, apologies! If there is enough interest to get
+                        \na server running again, this command will be updated with the info!", false).setColor(Color.GREEN)
                 .build());
         MessageBuilder last = new MessageBuilder();
         message = last.setEmbed(test).build();
