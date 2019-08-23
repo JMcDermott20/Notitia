@@ -43,8 +43,7 @@ public class ChooseCommand extends Command
                 // otherwise, pick a random response
             else
             {
-                log.debug(""+r.nextInt(items.length - 1));
-                event.replySuccess("I choose `"+items[r.nextInt(items.length) -1]+"`");
+                event.replySuccess("I choose `"+items[r.nextInt(items.length)]+"`");
             }
         }
     }
