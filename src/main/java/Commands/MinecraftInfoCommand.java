@@ -40,8 +40,8 @@ public class MinecraftInfoCommand extends Command
         test = (embed
                 .addField("Thanks for your interest in the server!", "Please read the following information for connecting.", true)
                 .addField("*Connection Info:*", "\n" +
-                        "The server is currently down, apologies! If there is enough interest to get
-                        \na server running again, this command will be updated with the info!", false).setColor(Color.GREEN)
+                        "The server is currently down, apologies! If there is enough interest to get " +
+                        "\na server running again, this command will be updated with the info!", false).setColor(Color.GREEN)
                 .build());
         MessageBuilder last = new MessageBuilder();
         message = last.setEmbed(test).build();
