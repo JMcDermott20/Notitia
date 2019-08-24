@@ -10,7 +10,7 @@ public class ChooseCommand extends Command
 {
 
     private static final org.slf4j.Logger log = LoggerFactory.getLogger(ChooseCommand.class);
-    Random r;
+    Random r = new Random();
 
     public ChooseCommand()
     {
@@ -36,9 +36,6 @@ public class ChooseCommand extends Command
             // split the choices on all whitespace
             String[] items = event.getArgs().split("\\s+");
 
-            int choice = r.nextInt(items.length);
-            log.warn("\n\nNUMBER GENERATED IS: " + choice + "\n\n");
-            log.warn("\n\nARGUMENTS PROVIDED: " + event.getArgs() + "\n\n");
             // if there is only one option, have a special reply
             if(items.length==1)
                 event.replyWarning("You only gave me one option, `"+items[0]+"`");
