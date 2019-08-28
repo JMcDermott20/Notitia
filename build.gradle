@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'com.tacetnox.bots'
-version '1.0.0_115'
+version '1.1.0_115'
 
 mainClassName = 'Notitia'
 
@@ -23,6 +23,8 @@ dependencies {
     compile 'com.jagrosh:jda-utilities:3.0.1'
     compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
     compile 'com.github.Samuel-Maddock:StrawPoll-Java-API:1.0.4'
+    compile 'org.jsoup:jsoup:1.12.1'
+
 }
 
 compileJava.options.encoding = 'UTF-8'

@@ -106,6 +106,7 @@ class ThreadMe implements Runnable{
                                 new StrawpollCommand(),
                                 new StatsCmd(),
                                 new SubNameCommand(),
+                                new ScpCommand(),
                                 new SubLengthCommand());
 
 
