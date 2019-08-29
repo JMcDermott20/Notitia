@@ -7,6 +7,7 @@ import net.dv8tion.jda.api.MessageBuilder;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import org.jsoup.Jsoup;
+import org.slf4j.LoggerFactory;
 
 import java.awt.*;
 import java.io.BufferedReader;
@@ -15,6 +16,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class ScpCommand extends Command {
+
+    private static final org.slf4j.Logger log = LoggerFactory.getLogger(ScpCommand.class);
 
     public ScpCommand()
     {
@@ -35,11 +38,13 @@ public class ScpCommand extends Command {
     @Override
     protected void execute(CommandEvent event) {
 
+        log.info("Working on it");
         if (event.getArgs().isEmpty()){
             event.replyError("You need to provide me an SCP number to load!");
-        }else if (event.getArgs().length()<2){
-            int number = Integer.parseInt(event.getArgs().trim());
+        }else{
 
+            String[] items = event.getArgs().split("\\s+");
+            int number = Integer.valueOf(items[0]);
             HttpURLConnection conn = null;
             String SCPNum = "";
             String SCPClass = "";
@@ -59,6 +64,7 @@ public class ScpCommand extends Command {
                 BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                 String inLine;
                 int keepGoing = 0;
+                log.info("And were here");
                 while((inLine=in.readLine())!=null){
                     //System.out.println(inLine+"\n");
                     if(inLine.startsWith("<p><strong>Item #:</strong>")){
@@ -103,6 +109,12 @@ public class ScpCommand extends Command {
                 System.out.println("\n\n"+fixedCon);
                 System.out.println("\n\n"+fixedDesc);
                 in.close();
+                if(fixedCon.length()>1023)
+                    fixedCon = fixedCon.substring(0, 1023);
+
+                if(fixedDesc.length()>1023)
+                    fixedDesc = fixedDesc.substring(0,1023);
+
 
                 Message message;
                 MessageEmbed test;
@@ -112,14 +124,15 @@ public class ScpCommand extends Command {
                         .addField("SCP Class: ", SCPClass, true)
                         .addField("Containment Procedures: ", fixedCon, false)
                         .addField("Description: ", fixedDesc, false)
-                        .setTitle("SCP-"+number)
-                        .setColor(Color.BLUE)
+                        .addField("Link to full page: ", mainURL+number, false)
+                        .setColor(Color.RED)
                         .build());
                 MessageBuilder last = new MessageBuilder();
                 message = last.setEmbed(test).build();
 
                 //Send it off
                 event.reply(message);
+
             }catch (Exception e){
                 e.printStackTrace();
             }finally{

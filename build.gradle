@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'com.tacetnox.bots'
-version '1.1.0_115'
+version '1.2.0'
 
 mainClassName = 'Notitia'
 
