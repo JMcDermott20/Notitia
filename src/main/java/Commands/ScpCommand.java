@@ -53,7 +53,11 @@ public class ScpCommand extends Command {
             String mainURL = "http://www.scp-wiki.net/scp-";
             if(number<100){
                 mainURL = "http://www.scp-wiki.net/scp-0";
+                if(number<10){
+                   mainURL = "http://www.scp-wiki.net/scp-00";
+                }
             }
+
             try{
                 URL url = new URL(mainURL+number);
                 conn=(HttpURLConnection)url.openConnection();
@@ -110,10 +114,10 @@ public class ScpCommand extends Command {
                 System.out.println("\n\n"+fixedDesc);
                 in.close();
                 if(fixedCon.length()>1023)
-                    fixedCon = fixedCon.substring(0, 1023);
+                    fixedCon = fixedCon.substring(0, 1000) + " (Continued in link...)";
 
                 if(fixedDesc.length()>1023)
-                    fixedDesc = fixedDesc.substring(0,1023);
+                    fixedDesc = fixedDesc.substring(0,1000) + " (Continued in link...)";
 
 
                 Message message;
