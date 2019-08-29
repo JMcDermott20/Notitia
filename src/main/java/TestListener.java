@@ -13,7 +13,7 @@ public class TestListener extends ListenerAdapter {
     @Override
     public void onGuildMessageReceived(@Nonnull GuildMessageReceivedEvent event) {
 
-        log.debug(event.getAuthor() + ": " + event.getMessage());
+        log.info(event.getAuthor() + ": " + event.getMessage());
 
     }
 }
