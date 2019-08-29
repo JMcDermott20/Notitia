@@ -38,7 +38,7 @@ public class ScpCommand extends Command {
     @Override
     protected void execute(CommandEvent event) {
 
-        log.info("Working on it");
+        log.info("SCP Called");
         if (event.getArgs().isEmpty()){
             event.replyError("You need to provide me an SCP number to load!");
         }else{
@@ -68,23 +68,22 @@ public class ScpCommand extends Command {
                 BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                 String inLine;
                 int keepGoing = 0;
-                log.info("And were here");
                 while((inLine=in.readLine())!=null){
                     //System.out.println(inLine+"\n");
                     if(inLine.startsWith("<p><strong>Item #:</strong>")){
                         String temp = inLine.substring(27,inLine.length()-4);
-                        System.out.println("\n\n"+temp);
+                        //System.out.println("\n\n"+temp);
                         SCPNum = temp;
                         //System.out.println(inLine);
                     }
                     if(inLine.startsWith("<p><strong>Object Class:</strong>")){
                         String temp = inLine.substring(33, inLine.length()-4);
-                        System.out.println("\n\n"+temp);
+                        //System.out.println("\n\n"+temp);
                         SCPClass = temp;
                     }
                     if(inLine.startsWith("<p><strong>Special Containment Procedures:</strong>")){
                         String temp = inLine.substring(51, inLine.length()-4);
-                        System.out.println("\n\n"+temp);
+                        //System.out.println("\n\n"+temp);
                         Containment = temp;
                     }
                     if((keepGoing==1) && inLine.startsWith("<p>")){
@@ -108,10 +107,10 @@ public class ScpCommand extends Command {
                 String fixedCon = Jsoup.parse(Containment).text();
                 String fixedDesc = Jsoup.parse(Description).text();
 
-                System.out.println(SCPNum);
-                System.out.println(SCPClass);
-                System.out.println("\n\n"+fixedCon);
-                System.out.println("\n\n"+fixedDesc);
+                //System.out.println(SCPNum);
+                //System.out.println(SCPClass);
+                //System.out.println("\n\n"+fixedCon);
+                //System.out.println("\n\n"+fixedDesc);
                 in.close();
                 if(fixedCon.length()>1023)
                     fixedCon = fixedCon.substring(0, 1000) + " (Continued in link...)";
