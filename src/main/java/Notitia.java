@@ -115,7 +115,7 @@ class ThreadMe implements Runnable{
                                 .setToken(token)//Assigning login token
                                 .setBulkDeleteSplittingEnabled(false)//Enabling bulk deletion instead  of splitting
                                 .setStatus(OnlineStatus.DO_NOT_DISTURB)//Status while loading
-                                .addEventListeners(new NotitiaListener(), waiter, client.build())
+                                .addEventListeners(new TestListener(), new NotitiaListener(), waiter, client.build())
                                 .build();
 
                         conn.close();
