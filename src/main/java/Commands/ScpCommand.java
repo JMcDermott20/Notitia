@@ -23,7 +23,7 @@ public class ScpCommand extends Command {
     {
         this.name = "scp";
         this.help = "Load the details of a provided SCP";
-        this.arguments = "<SCP Number>";
+        this.arguments = "<SCP Number 2-3000 or so>";
         this.guildOnly = false;
     }
 
@@ -120,16 +120,26 @@ public class ScpCommand extends Command {
 
 
                 Message message;
-                MessageEmbed test;
+
                 EmbedBuilder embed = new EmbedBuilder();
-                test = (embed
+                MessageEmbed test;
+                embed
                         .addField("SCP #: ", event.getArgs(), true)
                         .addField("SCP Class: ", SCPClass, true)
                         .addField("Containment Procedures: ", fixedCon, false)
                         .addField("Description: ", fixedDesc, false)
-                        .addField("Link to full page: ", mainURL+number, false)
-                        .setColor(Color.RED)
-                        .build());
+                        .addField("Link to full page: ", mainURL+number, false);
+                if(SCPClass.trim().equalsIgnoreCase("safe")){
+                    embed.setColor(Color.GREEN);
+                }else if(SCPClass.trim().equalsIgnoreCase("euclid")){
+                    embed.setColor(Color.BLUE);
+                }else if(SCPClass.trim().equalsIgnoreCase("keter")){
+                    embed.setColor(Color.RED);
+                }else{
+                    embed.setColor(Color.PINK);
+                }
+                test = embed.build();
+
                 MessageBuilder last = new MessageBuilder();
                 message = last.setEmbed(test).build();
 
