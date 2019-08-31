@@ -15,10 +15,12 @@ public class TestListener extends ListenerAdapter {
     @Override
     public void onMessageReceived(MessageReceivedEvent event){
         //log messages to console for testing purposes
-        log.info(event.getAuthor().getName() + ": " + event.getMessage().getContentDisplay());
+        log.info("\ngetmessage.contentDisplay\n"+event.getAuthor().getName() + ": " + event.getMessage().getContentDisplay()+"\nn\n");
 
         String user = event.getAuthor().getName();
         String message = event.getMessage().getContentRaw();
+
+        log.info("\ngetmessage.contentRaw\n"+user + ": " + message + "\n\n");
 
         if(user.equalsIgnoreCase("Tacet Nox")){
             event.getMessage().addReaction("U+1F643").queue();

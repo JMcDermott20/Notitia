@@ -126,7 +126,7 @@ public class NotitiaListener extends ListenerAdapter {
 
         time = new Timestamp(Calendar.getInstance().getTime().getTime());
 
-        System.out.println(time+" : " + guild+" : "+channel.getName()+" : "+user.getName()+" - "+message);
+        log.info(time+" : " + guild+" : "+channel.getName()+" : "+user.getName()+" - "+message);
 
         /*
         THE FOLLOWING IS A BETTER WAY OF MANAGING API CALLS to Twitch, shows how to set CLIENT-ID and OAUTH Headers
@@ -173,6 +173,15 @@ public class NotitiaListener extends ListenerAdapter {
             );
         }
         //TODO Example of adding unicode reaction to message
+
+        /*
+        https://www.unicode.org/emoji/charts/full-emoji-list.html
+
+        URL of unicode list of emojis
+
+
+         */
+
         //event.getMessage().addReaction("\uD83D\uDCA5").queue();
 
         /*if(message.startsWith("!")) {
