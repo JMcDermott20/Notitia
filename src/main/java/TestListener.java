@@ -23,7 +23,9 @@ public class TestListener extends ListenerAdapter {
         log.info("\ngetmessage.contentRaw\n"+user + ": " + message + "\n\n");
 
         if(user.equalsIgnoreCase("Tacet Nox")){
-            event.getMessage().addReaction("U+1F643").queue();
+
+            //how to add a reaction. Can do for others.
+            //event.getMessage().addReaction("U+1F643").queue();
         }
     }
 }
