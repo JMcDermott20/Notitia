@@ -17,24 +17,22 @@ public class TestListener extends ListenerAdapter {
     //Would rather use general Message Received Event as it captures DM's as well as regular messages.
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
-        //log messages to console for testing purposes
-        log.info("\ngetmessage.contentDisplay\n" + event.getAuthor().getName() + ": " + event.getMessage().getContentDisplay() + "\nn\n");
-
-        if(event.getAuthor().isBot())
-        {
-            return;
-        }
+        //Ignore bot messages, could cause an infinite loop if the bot somehow says something that triggers itself
+        if(event.getAuthor().isBot()) return;
 
 
-
+        //Grabbing user and message for easier interaction
         String user = event.getAuthor().getName();
         String message = event.getMessage().getContentRaw();
 
+
+        //log messages to console for testing purposes, two different options shown below
+        log.info("\ngetmessage.contentDisplay\n" + event.getAuthor().getName() + ": " + event.getMessage().getContentDisplay() + "\nn\n");
         log.info("\ngetmessage.contentRaw\n" + user + ": " + message + "\n\n");
 
 
         /*
-        The following block is my attempt at a small recreation of Unbelievabot's "Userphone" feature,
+        The following block is my attempt at a small recreation of Yydrasill's "Userphone" feature,
         allowing users to chat between multiple servers. I have it working with a single instance, however I would need
         more thought and effort to have it be something that could have more than one line working at a time. Would need
         to be threaded and possibly a lambda function to work properly at scale (SEE HELLO COMMAND FOR EXAMPLE)
@@ -57,9 +55,18 @@ public class TestListener extends ListenerAdapter {
                 if(event.getChannel().getName().equalsIgnoreCase(phoneChannels.get(0)) ||
                         event.getChannel().getName().equalsIgnoreCase(phoneChannels.get(1))
                 ){
+                    phoneLine[0].getChannel().sendMessage("The phone has been hung up by "
+                            + event.getAuthor()).queue();
+                    phoneLine[1].getChannel().sendMessage("The phone has been hung up by "
+                            + event.getAuthor()).queue();
+
+                    //Wipe the array
                     phoneLine = new MessageReceivedEvent[2];
+                    //Reset the check for activity
                     isChatting = 0;
-                    event.getChannel().sendMessage("The phone has been hung up").queue();
+
+
+
                 }else{
                     event.getChannel().sendMessage("The phone is currently in use, please wait for the other" +
                             " parties to finish their conversation!").queue();
@@ -78,9 +85,5 @@ public class TestListener extends ListenerAdapter {
                         ":: " + event.getMessage().getContentRaw()).queue();
             }
         }
-
-
-
-
     }
 }

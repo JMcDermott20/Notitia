@@ -5,7 +5,9 @@
  */
 
 import Util.SQLConnect;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.MessageBuilder;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -13,6 +15,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -25,7 +28,7 @@ import java.util.HashMap;
 
 public class NotitiaListener extends ListenerAdapter {
 
-    final static Logger log = LoggerFactory.getLogger(NotitiaListener.class);
+    private final static Logger log = LoggerFactory.getLogger(NotitiaListener.class);
     //variables for isLive function -- Possibly not all needed? Will revise
 
     /*private static int isRun = 0;
@@ -35,8 +38,6 @@ public class NotitiaListener extends ListenerAdapter {
     static String title;*/
     private static TextChannel announcements;
 
-    //private List<Member> users;
-    private static Date time;
     private JDA jda = null;
     private static HashMap<String, TextChannel> channelMap = new HashMap<>();
 
@@ -55,7 +56,7 @@ public class NotitiaListener extends ListenerAdapter {
     public void onMessageReceived(MessageReceivedEvent event) {
 
         //If from self, ignore. Could be spammed with another bot but I can deal with that if the need arises.
-        if (event.getAuthor().getId() == "194179563499159552") return;
+        if (event.getAuthor().getId().equals("194179563499159552")) return;
 
         /*//Building list of channels
          if (channelMap.isEmpty()) {
@@ -71,31 +72,29 @@ public class NotitiaListener extends ListenerAdapter {
             //LOG.log(Level.INFO, "Channel Set!");
         }*/
 
-        //TODO: Possibly make a separate call for responding privately to command calls, see below commented section
-        // for how to open user specific pm's
 
         //Handling PM's
         if (event.isFromType(ChannelType.PRIVATE)) {
-
-            //Commands respond to the channel they are received from, so commands created and added that way
-            //are handled automatically. Will only need to use this in the event of someone sending something other
+            //Commands respond to the channel they are received from, so commands run in a DM respond in DM
+            //Will only need to use this in the event of someone sending something other
             //than a command for the bot in a PM. Possibly just a quick response and a flag to reply saying to message
             //me directly if they need assistance with something. Can also log PM's if anyone is trying to screw with the bot
 
-            /*
             PrivateChannel privateChannel = event.getPrivateChannel();
 
             Message message;
             MessageEmbed test;
             EmbedBuilder embed = new EmbedBuilder();
             test = (embed
-                    .addField("Whoa dude", "This is a short test of PM's.", true)
+                    .addField("Whoa dude", "I appreciate the closeness, but only commands work here." +
+                            "\nIf you need help with the bot that the !!help command doesn't answer, message or tag " +
+                            "Tacet Nox", false)
                     .setColor(Color.MAGENTA)
                     .build());
             MessageBuilder last = new MessageBuilder();
             message = last.setEmbed(test).build();
 
-            privateChannel.sendMessage(message).queue();*/
+            privateChannel.sendMessage(message).queue();
 
         } else {
 
@@ -124,9 +123,10 @@ public class NotitiaListener extends ListenerAdapter {
 		});
 		*/
 
-        time = new Timestamp(Calendar.getInstance().getTime().getTime());
+        //private List<Member> users;
+        Date time = new Timestamp(Calendar.getInstance().getTime().getTime());
 
-        log.info(time+" : " + guild+" : "+channel.getName()+" : "+user.getName()+" - "+message);
+        log.info(time +" : " + guild+" : "+channel.getName()+" : "+user.getName()+" - "+message);
 
         /*
         THE FOLLOWING IS A BETTER WAY OF MANAGING API CALLS to Twitch, shows how to set CLIENT-ID and OAUTH Headers
@@ -159,6 +159,7 @@ public class NotitiaListener extends ListenerAdapter {
                 event.getMessage().addReaction("\u274C").queue();
                 e.printStackTrace();
             }finally{
+                assert conn != null;
                 conn.disconnect();
             }
         } else if(message.equalsIgnoreCase("!ping")){
