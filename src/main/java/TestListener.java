@@ -1,21 +1,18 @@
-import net.dv8tion.jda.api.entities.Emote;
-import net.dv8tion.jda.api.events.Event;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 
 public class TestListener extends ListenerAdapter {
 
-    final static Logger log = LoggerFactory.getLogger(TestListener.class);
+    private final static Logger log = LoggerFactory.getLogger(TestListener.class);
 
 
-    int isChatting = 0;
-    MessageReceivedEvent[] phoneLine = new MessageReceivedEvent[2];
+    private int isChatting = 0;
+    private MessageReceivedEvent[] phoneLine = new MessageReceivedEvent[2];
+    private ArrayList<String> phoneChannels = new ArrayList<>();
 
     //Would rather use general Message Received Event as it captures DM's as well as regular messages.
     @Override
@@ -35,21 +32,38 @@ public class TestListener extends ListenerAdapter {
 
         log.info("\ngetmessage.contentRaw\n" + user + ": " + message + "\n\n");
 
-        if(message.startsWith("!!chat")) {
+
+        /*
+        The following block is my attempt at a small recreation of Unbelievabot's "Userphone" feature,
+        allowing users to chat between multiple servers. I have it working with a single instance, however I would need
+        more thought and effort to have it be something that could have more than one line working at a time. Would need
+        to be threaded and possibly a lambda function to work properly at scale (SEE HELLO COMMAND FOR EXAMPLE)
+         */
+        if(message.startsWith("!!phone")) {
             if(isChatting == 0){
-                log.info("Line 1");
+                log.info("Phone Line 1");
                 isChatting =1;
                 phoneLine[0]=event;
+                phoneChannels.add(event.getMessage().getChannel().getName());
                 log.info(phoneLine[0].getChannel().getName());
             }else if(isChatting == 1){
-                log.info("Line 2");
+                log.info("Phone Line 2");
                 isChatting = 2;
                 phoneLine[1] = event;
+                phoneChannels.add(event.getChannel().getName());
                 log.info(phoneLine[1].getChannel().getName());
             }else if(isChatting == 2){
                 log.info("Resetting");
-                phoneLine = new MessageReceivedEvent[2];
-                isChatting = 0;
+                if(event.getChannel().getName().equalsIgnoreCase(phoneChannels.get(0)) ||
+                        event.getChannel().getName().equalsIgnoreCase(phoneChannels.get(1))
+                ){
+                    phoneLine = new MessageReceivedEvent[2];
+                    isChatting = 0;
+                    event.getChannel().sendMessage("The phone has been hung up").queue();
+                }else{
+                    event.getChannel().sendMessage("The phone is currently in use, please wait for the other" +
+                            " parties to finish their conversation!").queue();
+                }
             }
         }
         if(isChatting==2){
