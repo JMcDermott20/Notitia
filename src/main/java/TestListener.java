@@ -71,11 +71,11 @@ public class TestListener extends ListenerAdapter {
             if(phoneLine[0].getChannel().getName().equalsIgnoreCase(event.getChannel().getName())) {
                 log.info("sending to second line");
                 phoneLine[1].getChannel().sendMessage(event.getAuthor().getName() + " " +
-                        "::" + event.getMessage().getContentRaw()).queue();
+                        ":: " + event.getMessage().getContentRaw()).queue();
             }else if(phoneLine[1].getChannel().getName().equalsIgnoreCase(event.getChannel().getName())){
                 log.info("sending to first line");
                 phoneLine[0].getChannel().sendMessage(event.getAuthor().getName() + " " +
-                        "::" + event.getMessage().getContentRaw()).queue();
+                        ":: " + event.getMessage().getContentRaw()).queue();
             }
         }
 
