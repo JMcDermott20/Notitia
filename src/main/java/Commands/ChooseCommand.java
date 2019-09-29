@@ -23,7 +23,7 @@ public class ChooseCommand extends Command
     @Override
     protected void execute(CommandEvent event)
     {
-        System.out.println("~ Choose command used ~");
+        System.out.println("~ Choose  command used ~");
 
         // check that the user provided choices
         if(event.getArgs().isEmpty())
