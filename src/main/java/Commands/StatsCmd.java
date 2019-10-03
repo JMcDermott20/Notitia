@@ -21,6 +21,8 @@ public class StatsCmd extends Command {
         this.help = "shows some statistics on the bot";
         this.ownerCommand = true;
         this.guildOnly = false;
+        this.category = new Category("User Commands");
+
     }
 
     @Override

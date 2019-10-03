@@ -21,6 +21,8 @@ public class StrawpollCommand extends Command {
         this.help = "generates a strawpoll with the given options";
         this.arguments = " <option 1> <option 2> etc...";
         this.guildOnly = false;
+        this.category = new Category("User Commands");
+
     }
 
     @Override

@@ -24,6 +24,8 @@ public class ScheduleCommand extends Command
         this.name = "schedule";
         this.aliases = new String[]{"sched"};
         this.help = "Displays Tritemare's current streaming schedule";
+        this.category = new Category("User Commands");
+
     }
 
     @Override

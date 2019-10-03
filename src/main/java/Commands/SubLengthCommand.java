@@ -21,6 +21,8 @@ public class SubLengthCommand extends Command {
         this.help = "retrieves amount of months a user has been subscribed";
         this.arguments = " <user> ";
         this.guildOnly = false;
+        this.category = new Category("User Commands");
+
     }
 
     @Override

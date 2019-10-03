@@ -21,6 +21,8 @@ public class SubNameCommand extends Command {
         this.aliases = new String[]{"name", "subname"};
         this.arguments = " <user> ";
         this.guildOnly = false;
+        this.category = new Category("User Commands");
+
     }
 
     @Override

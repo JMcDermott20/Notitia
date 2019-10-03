@@ -24,6 +24,8 @@ public class MinecraftInfoCommand extends Command
         this.name = "connect";
         this.aliases = new String[]{"mine", "minecraft", "server"};
         this.help = "Displays connection info for our Minecraft Server";
+        this.category = new Category("User Commands");
+
     }
 
     /**

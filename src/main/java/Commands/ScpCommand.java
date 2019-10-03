@@ -25,6 +25,8 @@ public class ScpCommand extends Command {
         this.help = "Load the details of a provided SCP";
         this.arguments = "<SCP Number 2-3000 or so>";
         this.guildOnly = false;
+        this.category = new Category("User Commands");
+
     }
 
     /**

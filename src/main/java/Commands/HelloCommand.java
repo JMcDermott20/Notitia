@@ -20,6 +20,8 @@ public class HelloCommand extends Command
         this.name = "hello";
         this.aliases = new String[]{"hi", "hey", "hallo"};
         this.help = "says hello and waits for a response";
+        this.category = new Category("Sample Commands");
+
     }
 
 

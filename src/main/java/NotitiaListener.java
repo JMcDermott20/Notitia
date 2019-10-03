@@ -79,22 +79,25 @@ public class NotitiaListener extends ListenerAdapter {
             //Will only need to use this in the event of someone sending something other
             //than a command for the bot in a PM. Possibly just a quick response and a flag to reply saying to message
             //me directly if they need assistance with something. Can also log PM's if anyone is trying to screw with the bot
+            if(event.getMessage().getContentRaw().startsWith("!!")){
 
-            PrivateChannel privateChannel = event.getPrivateChannel();
+            }else {
+                PrivateChannel privateChannel = event.getPrivateChannel();
 
-            Message message;
-            MessageEmbed test;
-            EmbedBuilder embed = new EmbedBuilder();
-            test = (embed
-                    .addField("Whoa dude", "I appreciate the closeness, but only commands work here." +
-                            "\nIf you need help with the bot that the !!help command doesn't answer, message or tag " +
-                            "Tacet Nox", false)
-                    .setColor(Color.MAGENTA)
-                    .build());
-            MessageBuilder last = new MessageBuilder();
-            message = last.setEmbed(test).build();
+                Message message;
+                MessageEmbed test;
+                EmbedBuilder embed = new EmbedBuilder();
+                test = (embed
+                        .addField("Whoa dude", "I appreciate the closeness, but only commands work here." +
+                                "\nIf you need help with the bot that the !!help command doesn't answer, message or tag " +
+                                "Tacet Nox", false)
+                        .setColor(Color.MAGENTA)
+                        .build());
+                MessageBuilder last = new MessageBuilder();
+                message = last.setEmbed(test).build();
 
-            privateChannel.sendMessage(message).queue();
+                privateChannel.sendMessage(message).queue();
+            }
 
         } else {
 

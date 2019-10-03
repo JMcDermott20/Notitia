@@ -18,6 +18,7 @@ public class ChooseCommand extends Command
         this.help = "make a decision";
         this.arguments = "<item> <item> ...";
         this.guildOnly = false;
+        this.category = new Category("User Commands");
     }
 
     @Override
