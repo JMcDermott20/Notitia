@@ -30,7 +30,6 @@ public class NotitiaListener extends ListenerAdapter {
 
     private final static Logger log = LoggerFactory.getLogger(NotitiaListener.class);
     //variables for isLive function -- Possibly not all needed? Will revise
-
     /*private static int isRun = 0;
     static int isLive = 0;
     static String justGame;

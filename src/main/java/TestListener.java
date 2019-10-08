@@ -12,7 +12,7 @@ public class TestListener extends ListenerAdapter {
 
     private int isChatting = 0;
     private MessageReceivedEvent[] phoneLine = new MessageReceivedEvent[2];
-    private ArrayList<String> phoneChannels = new ArrayList<>();
+    private ArrayList<String> phoneChannelsID = new ArrayList<>();
 
     //Would rather use general Message Received Event as it captures DM's as well as regular messages.
     @Override
@@ -42,18 +42,18 @@ public class TestListener extends ListenerAdapter {
                 log.info("Phone Line 1");
                 isChatting =1;
                 phoneLine[0]=event;
-                phoneChannels.add(event.getMessage().getChannel().getName());
+                phoneChannelsID.add(event.getMessage().getChannel().getId());
                 log.info(phoneLine[0].getChannel().getName());
             }else if(isChatting == 1){
                 log.info("Phone Line 2");
                 isChatting = 2;
                 phoneLine[1] = event;
-                phoneChannels.add(event.getChannel().getName());
+                phoneChannelsID.add(event.getChannel().getId());
                 log.info(phoneLine[1].getChannel().getName());
             }else if(isChatting == 2){
                 log.info("Resetting");
-                if(event.getChannel().getName().equalsIgnoreCase(phoneChannels.get(0)) ||
-                        event.getChannel().getName().equalsIgnoreCase(phoneChannels.get(1))
+                if(event.getChannel().getId().equalsIgnoreCase(phoneChannelsID.get(0)) ||
+                        event.getChannel().getId().equalsIgnoreCase(phoneChannelsID.get(1))
                 ){
                     phoneLine[0].getChannel().sendMessage("The phone has been hung up by "
                             + event.getAuthor()).queue();
@@ -75,11 +75,11 @@ public class TestListener extends ListenerAdapter {
         }
         if(isChatting==2){
 
-            if(phoneLine[0].getChannel().getName().equalsIgnoreCase(event.getChannel().getName())) {
+            if(phoneLine[0].getChannel().getId().equalsIgnoreCase(event.getChannel().getId())) {
                 log.info("sending to second line");
                 phoneLine[1].getChannel().sendMessage(event.getAuthor().getName() + " " +
                         ":: " + event.getMessage().getContentRaw()).queue();
-            }else if(phoneLine[1].getChannel().getName().equalsIgnoreCase(event.getChannel().getName())){
+            }else if(phoneLine[1].getChannel().getId().equalsIgnoreCase(event.getChannel().getId())){
                 log.info("sending to first line");
                 phoneLine[0].getChannel().sendMessage(event.getAuthor().getName() + " " +
                         ":: " + event.getMessage().getContentRaw()).queue();
