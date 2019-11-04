@@ -19,7 +19,7 @@ repositories {
 
 dependencies {
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.15'
-    compile 'net.dv8tion:JDA:4.0.0_54'
+    compile 'net.dv8tion:JDA:4.0.0_55'
     compile 'com.jagrosh:jda-utilities:3.0.2'
     compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
     compile 'com.github.Samuel-Maddock:StrawPoll-Java-API:1.0.4'
