@@ -5,10 +5,7 @@ import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
 import org.slf4j.LoggerFactory;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class AddKnightName extends Command {
 
@@ -19,10 +16,10 @@ public class AddKnightName extends Command {
 
         this.name = "addname";
         this.help = "Make sure you follow the format properly. !!addname subname=knightname";
-        this.aliases = new String[]{"name", "subname"};
-        this.arguments = " <user>= <knighted name> ";
+        this.arguments = " <user>=<knighted name> ";
         this.guildOnly = false;
-        this.category = new Category("User Commands");
+        this.category = new Category("Mod Commands");
+        this.requiredRole = "MODERATOR";
 
     }
 
@@ -39,47 +36,29 @@ public class AddKnightName extends Command {
             String[] items = event.getArgs().split("=");
 
             try {
-                Connection conn = new SQLConnect().connect();
+
                 String subname = items[0];
                 String knightname = items[1];
 
-                addName(subname, knightname, conn);
+                addName(subname, knightname);
 
-                conn.close();
-            }catch(SQLException e){
+            }catch(Exception e){
                 log.error(e.getMessage());
             }
         }
     }
 
-    //Get the amount of months a user has been subbed
-    public String addName(String sub, String knight, Connection conn) {
+    private void addName(String sub, String knight) {
         try {
-            //System.out.println(username);
-            Statement stmt = connection.connect().createStatement();
-            ResultSet rs = stmt.executeQuery("Select subname FROM subs WHERE username");
-            while (rs.next()) {
-                String knightName = rs.getString("subname");
-                log.info(knightName);
 
-                if (knightName!=null) {
-                    connection.disconnect();
-                    rs.close();
-                    return knightName;
-                } else {
-                    connection.disconnect();
-                    rs.close();
-                    return "Something went wrong, let Tacet Nox know what you did to get this message!";
-                }
-            }
+            String sql = "INSERT INTO `subs` (`id`,`username`,`subname`,`months_subbed`) " +
+                    "VALUES (NULL, '" + sub + "', '" + knight + "', 1)";
+            PreparedStatement stmnt = connection.connect().prepareStatement(sql);
+            stmnt.execute();
+
         } catch (SQLException e) {
             connection.disconnect();
-            return "Something went wrong, let Tacet Nox know what you did to get this message!";
-        } finally {
-            connection.disconnect();
-
         }
-        return "No name was found for that user!";
     }
 
 }
