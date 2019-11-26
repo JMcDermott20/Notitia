@@ -5,18 +5,19 @@
  */
 
 import Commands.*;
+import Commands.TwitchSubs.AddKnightName;
+import Commands.TwitchSubs.SubLengthCommand;
+import Commands.TwitchSubs.SubNameCommand;
 import Util.GetLogin0Auth;
 import Util.GetLoginOwner;
 import Util.SQLConnect;
 import com.jagrosh.jdautilities.command.CommandClientBuilder;
-import com.jagrosh.jdautilities.command.annotation.JDACommand;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import com.jagrosh.jdautilities.examples.command.AboutCommand;
 import com.jagrosh.jdautilities.examples.command.PingCommand;
 import com.jagrosh.jdautilities.examples.command.ShutdownCommand;
 import net.dv8tion.jda.api.*;
 import net.dv8tion.jda.api.entities.Activity;
-import net.dv8tion.jda.api.entities.Category;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,7 +25,6 @@ import java.awt.*;
 import java.sql.Connection;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 public class Notitia {
         /*
@@ -109,6 +109,7 @@ class ThreadMe implements Runnable{
                                 new StrawpollCommand(),
                                 new StatsCmd(),
                                 new SubNameCommand(),
+                                new AddKnightName(),
                                 new ScpCommand(),
                                 new SubLengthCommand());
 
