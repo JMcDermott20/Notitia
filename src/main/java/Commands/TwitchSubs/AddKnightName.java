@@ -50,6 +50,8 @@ public class AddKnightName extends Command {
 
     private void addName(String sub, String knight) {
         try {
+            sub = sub.replaceAll("[^a-zA-Z0-9 ]", "");
+            knight = knight.replaceAll("[^a-zA-Z0-9 ]", "");
 
             String sql = "INSERT INTO `subs` (`id`,`username`,`subname`,`months_subbed`) " +
                     "VALUES (NULL, '" + sub + "', '" + knight + "', 1)";

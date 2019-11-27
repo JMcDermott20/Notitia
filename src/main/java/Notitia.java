@@ -122,6 +122,7 @@ class ThreadMe implements Runnable{
                                 .addEventListeners(new TestListener(), new NotitiaListener(), waiter, client.build())
                                 .build();
 
+                        //Close the connection since it'll never be used again here
                         conn.close();
                         log.info(jda.getAccountType() + " --- BUILDING JDA INSTANCE COMPLETE");
 
