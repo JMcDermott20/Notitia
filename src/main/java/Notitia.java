@@ -4,7 +4,7 @@
  * Intended to launch both the Twitch and Discord bots for Tritemare
  */
 
-import Commands.*;
+import Commands.General.*;
 import Commands.TwitchSubs.AddKnightName;
 import Commands.TwitchSubs.SubLengthCommand;
 import Commands.TwitchSubs.SubNameCommand;
@@ -111,6 +111,7 @@ class ThreadMe implements Runnable{
                                 new SubNameCommand(),
                                 new AddKnightName(),
                                 new ScpCommand(),
+                                new BotCount(waiter),
                                 new SubLengthCommand());
 
 
