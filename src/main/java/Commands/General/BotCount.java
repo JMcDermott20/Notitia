@@ -35,10 +35,10 @@ public class BotCount extends Command
         JDA jda = event.getJDA();
         for(User user : jda.getUsers()){
             if(user.isBot()){
-                System.out.println(user.getName() + " is a BOT");
+                //System.out.println(user.getName() + " is a BOT");
                 bots++;
             }else if (!user.isBot()){
-                System.out.println(user.getName() + " is NOT a BOT");
+               //System.out.println(user.getName() + " is NOT a BOT");
                 notBots++;
             }
         }
