@@ -100,19 +100,19 @@ class ThreadMe implements Runnable{
                                 new AboutCommand(Color.BLUE, "an experiment in being useful in providing information and being a testing ground for new ideas!",
                                         new String[]{"See the Length of Time You've Been Subscribed", "Trite's Schedule Information", "Generate a Strawpoll"},
                                         new Permission[]{Permission.ADMINISTRATOR}),
-                                new ChooseCommand(),
                                 new HelloCommand(waiter),
-                                new PingCommand(),
+                                new ChooseCommand(),
                                 new ShutdownCommand(),
                                 new ScheduleCommand(),
+                                new ScpCommand(),
+                                new SubLengthCommand(),
                                 new MinecraftInfoCommand(),
                                 new StrawpollCommand(),
                                 new StatsCmd(),
                                 new SubNameCommand(),
-                                new AddKnightName(),
-                                new ScpCommand(),
-                                new BotCount(waiter),
-                                new SubLengthCommand());
+                                new PingCommand(),
+                                new AddKnightName()
+                                );
 
 
                         log.info("~~ Building bot async");
