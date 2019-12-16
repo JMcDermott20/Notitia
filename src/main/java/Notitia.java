@@ -11,6 +11,7 @@ import Commands.TwitchSubs.SubNameCommand;
 import Util.GetLogin0Auth;
 import Util.GetLoginOwner;
 import Util.SQLConnect;
+import Util.WebServer;
 import com.jagrosh.jdautilities.command.CommandClientBuilder;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import com.jagrosh.jdautilities.examples.command.AboutCommand;
@@ -120,13 +121,18 @@ class ThreadMe implements Runnable{
                                 .setToken(token)//Assigning login token
                                 .setBulkDeleteSplittingEnabled(false)//Enabling bulk deletion instead  of splitting
                                 .setStatus(OnlineStatus.DO_NOT_DISTURB)//Status while loading
-                                .addEventListeners(new TestListener(), new NotitiaListener(), waiter, client.build())
-                                .build();
+                                .addEventListeners(new NotitiaListener(), waiter, client.build())
+                                .build().awaitReady();
 
                         //Close the connection since it'll never be used again here
                         conn.close();
                         log.info(jda.getAccountType() + " --- BUILDING JDA INSTANCE COMPLETE");
 
+                        /*log.info("NOW LAUNCHING WEBSOCKET RESPONSE WEBSERVER");
+                        WebServer server = new WebServer();
+                        server.WebServer(4568);
+                        log.info("SERVER LAUNCHED AND WAITING FOR CONNECTIONS");
+                        */
                 }catch(Exception e){
                         log.warn(e.getMessage());
                 }

@@ -15,7 +15,7 @@ public class SQLConnect {
     private static final String DATABASE_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String DATABASE_URL = "jdbc:mysql://127.0.0.1:3306/tritemare?useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=EST";
     private static final String USERNAME = "tacet";
-    private static final String PASSWORD = "UPDATEFORSHADOW"; // UPDATE PRIOR TO SHADOWJAR
+    private static final String PASSWORD = "FILLFORSHADOWRUN"; // UPDATE PRIOR TO SHADOWJAR
 
 
     // init connection object

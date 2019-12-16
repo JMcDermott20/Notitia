@@ -5,6 +5,7 @@
  */
 
 import Util.SQLConnect;
+import com.google.gson.JsonObject;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.MessageBuilder;
@@ -12,13 +13,18 @@ import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import org.json.JSONArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.awt.*;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.util.Calendar;
@@ -133,21 +139,22 @@ public class NotitiaListener extends ListenerAdapter {
         /*
         THE FOLLOWING IS A BETTER WAY OF MANAGING API CALLS to Twitch, shows how to set CLIENT-ID and OAUTH Headers
          */
-        if(message.equalsIgnoreCase("!test")){
+
+            if(message.equalsIgnoreCase("!getID")){
             HttpURLConnection conn = null;
             try{
-                URL url = new URL("https://api.twitch.tv/helix/videos?user_id=64207063");
+                URL url = new URL("https://api.twitch.tv/helix/users?login=tacetnoxpavor");
                 conn=(HttpURLConnection)url.openConnection();
                 conn.setDoInput(true);
                 conn.setDoOutput(true);
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Client-ID", "p6f433iqeua2a3282ghwpxcd3wl4yan");
-                conn.setRequestProperty("Authorization", "OAuth 3wgs5fs9vp3nsd8bxkvb15qdwdqb98");
+                conn.setRequestProperty("Authorization", "Bearer 3wgs5fs9vp3nsd8bxkvb15qdwdqb98");
 
                 BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                 String inLine;
                 while((inLine=in.readLine())!=null){
-                    System.out.println(inLine+"\n");
+                    channel.sendMessage(inLine).queue();
                 }
                 in.close();
                 int rc = conn.getResponseCode();
@@ -164,7 +171,12 @@ public class NotitiaListener extends ListenerAdapter {
                 assert conn != null;
                 conn.disconnect();
             }
-        } else if(message.equalsIgnoreCase("!ping")){
+        }
+
+
+
+
+        if(message.equalsIgnoreCase("!ping")){
             jda.getRestPing().queue(
                     (ping) -> {
                         channel.sendMessageFormat(
