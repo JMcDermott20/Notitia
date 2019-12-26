@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'com.tacetnox.bots'
-version '1.6.5'
+version '1.7.0'
 
 mainClassName = 'Notitia'
 
@@ -18,13 +18,13 @@ repositories {
 }
 
 dependencies {
-    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.15'
-    compile 'net.dv8tion:JDA:4.0.0_77'
-    compile 'com.jagrosh:jda-utilities:3.0.2'
-    compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
-    compile 'com.github.Samuel-Maddock:StrawPoll-Java-API:1.0.4'
-    compile 'org.jsoup:jsoup:1.12.1'
-    compile 'com.squareup.okhttp:okhttp:2.5.0'
+    implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.15'
+    implementation 'net.dv8tion:JDA:4.1.0_84'
+    implementation 'com.jagrosh:jda-utilities:3.0.2'
+    implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+    implementation 'com.github.Samuel-Maddock:StrawPoll-Java-API:1.0.4'
+    implementation 'org.jsoup:jsoup:1.12.1'
+    implementation 'com.squareup.okhttp:okhttp:2.5.0'
 
 }
 

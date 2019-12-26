@@ -62,7 +62,6 @@ public class Notitia {
 class ThreadMe implements Runnable{
 
         private static Logger log = LoggerFactory.getLogger(ThreadMe.class);
-        private JDA jda = null;
 
         public void run(){
                 try{
@@ -100,8 +99,9 @@ class ThreadMe implements Runnable{
                         client.addCommands(
                                 new AboutCommand(Color.BLUE, "an experiment in being useful in providing information and being a testing ground for new ideas!",
                                         new String[]{"See the Length of Time You've Been Subscribed", "Trite's Schedule Information", "Generate a Strawpoll"},
-                                        new Permission[]{Permission.ADMINISTRATOR}),
+                                        Permission.ADMINISTRATOR),
                                 new HelloCommand(waiter),
+                                new ActivityUpdate(),
                                 new ChooseCommand(),
                                 new ShutdownCommand(),
                                 new ScheduleCommand(),
@@ -117,7 +117,10 @@ class ThreadMe implements Runnable{
 
 
                         log.info("~~ Building bot async");
-                        jda = new JDABuilder(AccountType.BOT)
+                        //Assigning login token
+                        //Enabling bulk deletion instead  of splitting
+                        //Status while loading
+                        JDA jda = new JDABuilder(AccountType.BOT)
                                 .setToken(token)//Assigning login token
                                 .setBulkDeleteSplittingEnabled(false)//Enabling bulk deletion instead  of splitting
                                 .setStatus(OnlineStatus.DO_NOT_DISTURB)//Status while loading

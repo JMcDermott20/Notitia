@@ -117,30 +117,20 @@ public class NotitiaListener extends ListenerAdapter {
 
         MessageChannel channel = event.getChannel();
         String message = event.getMessage().getContentRaw();
-        //String mention = event.getAuthor().getAsMention();
+
         User user = event.getAuthor();
         String guild = event.getGuild().getName();
 
-        //users = guild.getMembers();
-
-        //LOG.info(users.size() + "");
-
-		/*
-		user.openPrivateChannel().queue(success -> {
-			user.getPrivateChannel().sendMessage("Hey").queue();
-		});
-		*/
-
-        //private List<Member> users;
         Date time = new Timestamp(Calendar.getInstance().getTime().getTime());
 
         log.info(time +" : " + guild+" : "+channel.getName()+" : "+user.getName()+" - "+message);
 
         /*
         THE FOLLOWING IS A BETTER WAY OF MANAGING API CALLS to Twitch, shows how to set CLIENT-ID and OAUTH Headers
+        TODO - Determine better way using OKAYHTTP, should be even easier.
          */
 
-            if(message.equalsIgnoreCase("!getID")){
+        if(message.equalsIgnoreCase("!getID")){
             HttpURLConnection conn = null;
             try{
                 URL url = new URL("https://api.twitch.tv/helix/users?login=tacetnoxpavor");
@@ -174,13 +164,16 @@ public class NotitiaListener extends ListenerAdapter {
         }
 
 
-
+        if(message.equalsIgnoreCase("!active")){
+            jda.getPresence().setActivity(Activity.playing("with loads of new people ;)"));
+        }
 
         if(message.equalsIgnoreCase("!ping")){
+            event.getMessage().addReaction("\uD83D\uDC4C").queue();
             jda.getRestPing().queue(
                     (ping) -> {
                         channel.sendMessageFormat(
-                                "Ping\n"
+                                "Pong\n"
                                         + "HTTP: %d ms\n"
                                         + "WS: %d ms",
                                 ping, jda.getGatewayPing()).queue();
@@ -191,25 +184,10 @@ public class NotitiaListener extends ListenerAdapter {
 
         /*
         https://www.unicode.org/emoji/charts/full-emoji-list.html
-
         URL of unicode list of emojis
-
-
          */
 
         //event.getMessage().addReaction("\uD83D\uDCA5").queue();
 
-        /*if(message.startsWith("!")) {
-            String commandVar = "";
-            if(message.contains(" ")){
-                if((message.split(" ", 2)[1]) == null){
-                    message = message.split(" ")[0];
-                }else {
-                    commandVar = message.split(" ", 2)[1];
-                    message = message.split(" ")[0];
-                }
-            }
-
-            }*/
         }
 }
