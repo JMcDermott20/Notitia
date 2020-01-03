@@ -54,7 +54,7 @@ public class NotitiaListener extends ListenerAdapter {
     public void onReady(ReadyEvent event){
         log.info("Now logged in as " + event.getJDA().getAccountType().toString() + " -- " + event.getJDA().getSelfUser().getName());
         jda = event.getJDA();
-        jda.getPresence().setActivity(Activity.watching("Clouds float by..."));
+        jda.getPresence().setActivity(Activity.listening("for Commands | !!help"));
     }
 
     //listener for messages received. Passes them off to handler after setting the announcement channel
@@ -62,20 +62,6 @@ public class NotitiaListener extends ListenerAdapter {
 
         //If from self, ignore. Could be spammed with another bot but I can deal with that if the need arises.
         if (event.getAuthor().getId().equals("194179563499159552")) return;
-
-        /*//Building list of channels
-         if (channelMap.isEmpty()) {
-           Iterator<TextChannel> x = jda.getGuilds().get(0).getManager().getGuild().getTextChannels().iterator();
-          while (x.hasNext()) {
-               TextChannel chan = x.next();
-               String name = chan.getName();
-                //System.out.println(chan.toString());
-                //System.out.println(name);
-                       channelMap.put(name, chan);
-            }
-            announcements = channelMap.get("announcements");
-            //LOG.log(Level.INFO, "Channel Set!");
-        }*/
 
 
         //Handling PM's
@@ -170,6 +156,7 @@ public class NotitiaListener extends ListenerAdapter {
 
         if(message.equalsIgnoreCase("!ping")){
             event.getMessage().addReaction("\uD83D\uDC4C").queue();
+            //noinspection CodeBlock2Expr
             jda.getRestPing().queue(
                     (ping) -> {
                         channel.sendMessageFormat(
@@ -180,14 +167,7 @@ public class NotitiaListener extends ListenerAdapter {
                     }
             );
         }
-        //TODO Example of adding unicode reaction to message
 
-        /*
-        https://www.unicode.org/emoji/charts/full-emoji-list.html
-        URL of unicode list of emojis
-         */
-
-        //event.getMessage().addReaction("\uD83D\uDCA5").queue();
 
         }
 }

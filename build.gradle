@@ -4,7 +4,7 @@ plugins {
     id'com.github.johnrengelman.shadow' version '4.0.4'
 }
 
-group 'com.tacetnox.bots'
+group 'tech.tacetnox.bots'
 version '1.7.0'
 
 mainClassName = 'Notitia'
@@ -19,7 +19,7 @@ repositories {
 
 dependencies {
     implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.15'
-    implementation 'net.dv8tion:JDA:4.1.0_84'
+    implementation 'net.dv8tion:JDA:4.1.0_91'
     implementation 'com.jagrosh:jda-utilities:3.0.2'
     implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
     implementation 'com.github.Samuel-Maddock:StrawPoll-Java-API:1.0.4'
@@ -27,6 +27,11 @@ dependencies {
     implementation 'com.squareup.okhttp:okhttp:2.5.0'
 
 }
+//Altering where build/libs *output location of actual shadowJar file* is:
+libsDirName = 'R:\\Desktop\\Built Bot Jars'
 
+
+//Setting encoding
 compileJava.options.encoding = 'UTF-8'
+//Setting fileName format
 shadowJar.archiveFileName = 'Notitia.v' + version + ".jar"

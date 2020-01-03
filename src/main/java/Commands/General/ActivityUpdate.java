@@ -24,11 +24,12 @@ public class ActivityUpdate extends Command
         String input = event.getArgs();
         event.getChannel().sendMessage("Activity Updating shortly...").queue();
         try {
-            Thread.sleep(4000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         event.getJDA().getPresence().setActivity(Activity.playing(input));
+        event.getMessage().addReaction("\u2705").queue();
     }
 
 }
